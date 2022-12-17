@@ -1,8 +1,10 @@
 import React, { useEffect, useReducer } from 'react'
 import axios from 'axios'
 import LoadingBox from "../components/LoadingBox";
-import { Col, Row } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import Blog from '../components/Blog';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 
 const reducer = (state, action) => {
     switch(action.type){
@@ -20,6 +22,7 @@ const reducer = (state, action) => {
 
 export default function HomeScreen() {
   
+  const userInfo = useSelector((state) => state.user.userInfo)
 
     const [{loading, error, blogs}, dispatch] = useReducer(reducer, {
         blogs: [],
@@ -52,6 +55,8 @@ export default function HomeScreen() {
             </div>
         ) : (
         <div>
+          {userInfo.token && <Link to='/posts/new'><Button variant='success' >Add Blog</Button></Link>}
+
             <Row>
                 {blogs.map(blog => (
                     <Col md={4} key={blog.id}>

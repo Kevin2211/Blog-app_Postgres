@@ -3,12 +3,15 @@ import React, { useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch} from 'react-redux'
+import { signin} from '../Redux/userReducer'
 
-export default function SigninScreen(props) {
+export default function SigninScreen() {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const {setIsLoggedIn} = props
+
+    const dispatch = useDispatch()
 
     const submitHandler = async (e) => {
         e.preventDefault()
@@ -19,8 +22,8 @@ export default function SigninScreen(props) {
             })
 
             localStorage.setItem('userInfo', JSON.stringify(data))
+            dispatch(signin(data))
             toast.success('Sign in successfully')
-            setIsLoggedIn(true)
             navigate('/')
         } catch (error) {
             toast.error('Invalid Email or Password')

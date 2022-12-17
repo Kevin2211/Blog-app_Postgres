@@ -5,9 +5,9 @@ const {Post} = require('../models')
 
 
 router.post('/new', async function(req, res, next) {
-    const { title, content } = req.body
+    const { title, content,userId } = req.body
 
-    const post = await Post.create({title, content, userId: 1})
+    const post = await Post.create({title, content, userId})
     res.json(post)
    
 })

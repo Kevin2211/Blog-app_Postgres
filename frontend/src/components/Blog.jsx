@@ -9,6 +9,7 @@ export default function Blog(props) {
     <Card.Body>
         <Link className='nav-link' to={`/product/${blog.id}`}>
             <Card.Title> { blog.title }</Card.Title>
+            
 
         <Button >View</Button>
         </Link>

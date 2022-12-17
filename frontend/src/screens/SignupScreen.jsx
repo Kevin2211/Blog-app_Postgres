@@ -6,7 +6,8 @@ import { Button, Container, Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-
+import { useDispatch} from 'react-redux'
+import { signin} from '../Redux/userReducer'
 
 export default function SignupScreen() {
     const navigate = useNavigate()
@@ -19,6 +20,7 @@ export default function SignupScreen() {
     const [confirmPassword, setConfirmPassword] = useState('')
 
 
+    const dispatch = useDispatch()
 
     const submitHandler = async (e) => {
         e.preventDefault()
@@ -35,7 +37,8 @@ export default function SignupScreen() {
             })
 
             localStorage.setItem('userInfo', JSON.stringify(data))
-            toast.success('Sign up successfully')
+            dispatch(signin(data))
+            toast.success("Sign in successfully")
             navigate('/')
         } catch (error) {
             toast.error('Email already exist')

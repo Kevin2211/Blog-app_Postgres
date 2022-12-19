@@ -27,8 +27,8 @@ app.use('/api/posts', postsRouter);
 app.use('/api/comments', commentsRouter);
 
 
-app.use(express.static('/Users/kevin/Desktop/reactjs/Blog-app/frontend/build'))
-app.get('*', (req,res) => res.sendFile('/Users/kevin/Desktop/reactjs/Blog-app/frontend/build/index.html'))
+app.use(express.static(path.join(__dirname,'../frontend/build')))
+app.get('*', (req,res) => res.sendFile(path.join(__dirname, '../frontend/build/index')))
 console.log(__dirname)
 
 app.use((err, req, res, next) => {

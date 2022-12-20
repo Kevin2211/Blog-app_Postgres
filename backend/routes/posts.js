@@ -7,14 +7,25 @@ const {Post} = require('../models')
 router.post('/new', async function(req, res, next) {
     const { title, content,userId } = req.body
 
-    const post = await Post.create({title, content, userId})
-    res.json(post)
+    try {
+        res.json(post)
+        const post = await Post.create({title, content, userId})
+        
+    } catch (error) {
+        res.send(error)
+    }
    
 })
 
 router.get('/', async function(req, res, next) {
  const blogs = await Post.findAll()
- res.json(blogs)
+if(blogs){
+    res.json(blogs)
+
+}else{
+    res.send('something went wrong')
+}
+
    
 })
 
